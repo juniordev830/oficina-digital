@@ -4,17 +4,17 @@ Ordens de serviço, orçamentos e acompanhamento de consertos.
 
 ## Estado atual
 
-Projeto em planejamento. Este repositório contém a definição do projeto; ainda não há aplicação executável, interface ou testes implementados.
+MVP executável em branch de desenvolvimento, com testes automatizados. Núcleo em memória de ordens de serviço com transições de status e teste executável. Ainda não há orçamento, interface ou banco de dados.
 
-## Tecnologias propostas
+## Tecnologias implementadas
 
-C#, .NET, React e PostgreSQL. A escolha será confirmada ao iniciar a implementação.
+.NET 8 e C#.
 
 ## Escopo da primeira versão
 
 - [ ] Cadastrar clientes e equipamentos
 - [ ] Abrir ordem de serviço e orçamento
-- [ ] Acompanhar etapas do conserto
+- [x] Acompanhar etapas do conserto
 
 ## Critérios para concluir a primeira versão
 
@@ -25,7 +25,14 @@ C#, .NET, React e PostgreSQL. A escolha será confirmada ao iniciar a implementa
 
 ## Desenvolvimento
 
-As funcionalidades acima são planejadas. Os comandos de instalação e a estrutura do código serão documentados junto da primeira implementação. Não há integrações externas ou serviços ativos nesta etapa.
+Execute na raiz do repositório:
+
+```bash
+dotnet build src/OficinaDigital/OficinaDigital.csproj
+dotnet run --project tests/OficinaDigital.Tests/OficinaDigital.Tests.csproj
+```
+
+O GitHub Actions executa a validação em pushes e pull requests. Este é um núcleo demonstrativo; as funcionalidades ainda marcadas como pendentes na lista acima continuam planejadas.
 
 ## Privacidade e configuração
 
