@@ -14,7 +14,7 @@ MVP executável em branch de desenvolvimento, com testes automatizados. Núcleo 
 
 - [ ] Cadastrar clientes e equipamentos
 - [ ] Abrir ordem de serviço e orçamento
-- [ ] Acompanhar etapas do conserto
+- [x] Acompanhar etapas do conserto
 
 ## Critérios para concluir a primeira versão
 
