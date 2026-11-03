@@ -42,6 +42,9 @@ public sealed record OrdemServico(
     }
 }
 
+/// <summary>Snapshot of the service orders currently held in memory.</summary>
+public sealed record ResumoOrdens(int Abertas, int EmExecucao, int Prontas, int Entregues, int Canceladas);
+
 public sealed class OficinaService
 {
     private readonly List<OrdemServico> _ordens = [];
@@ -61,6 +64,45 @@ public sealed class OficinaService
         var atualizada = _ordens[index].Avancar(status);
         _ordens[index] = atualizada;
         return atualizada;
+    }
+
+    /// <summary>Counts orders by lifecycle state without mutating any order.</summary>
+    public ResumoOrdens Resumo() => new(
+        _ordens.Count(o => o.Status == StatusOrdem.Aberta),
+        _ordens.Count(o => o.Status == StatusOrdem.EmExecucao),
+        _ordens.Count(o => o.Status == StatusOrdem.Pronta),
+        _ordens.Count(o => o.Status == StatusOrdem.Entregue),
+        _ordens.Count(o => o.Status == StatusOrdem.Cancelada));
+
+    /// <summary>
+    /// Lists actionable orders: first ready for pickup, then in progress, then new.
+    /// Delivered and cancelled orders do not appear.
+    /// </summary>
+    public IReadOnlyList<OrdemServico> ListarPendentes()
+    {
+        var results = _ordens
+            .Where(o => o.Status is StatusOrdem.Aberta or StatusOrdem.EmExecucao or StatusOrdem.Pronta)
+            .OrderBy(o => o.Status switch
+            {
+                StatusOrdem.Pronta => 0,
+                StatusOrdem.EmExecucao => 1,
+                _ => 2
+            })
+            .ThenBy(o => o.Id)
+            .ToArray();
+        return Array.AsReadOnly(results);
+    }
+
+    /// <summary>Searches by equipment name, case-insensitively; returns an immutable snapshot.</summary>
+    public IReadOnlyList<OrdemServico> BuscarPorEquipamento(string termo)
+    {
+        if (string.IsNullOrWhiteSpace(termo))
+            throw new ArgumentException("Termo de busca obrigatório.", nameof(termo));
+        var results = _ordens
+            .Where(o => o.Equipamento.Contains(termo.Trim(), StringComparison.OrdinalIgnoreCase))
+            .OrderBy(o => o.Id)
+            .ToArray();
+        return Array.AsReadOnly(results);
     }
 
     public IReadOnlyList<OrdemServico> Listar() => _ordens.AsReadOnly();
