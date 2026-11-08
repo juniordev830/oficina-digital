@@ -128,7 +128,7 @@ Testar("clientes podem ser pesquisados", () =>
     s.CadastrarCliente("Ana", "a@b.com");
     Igual("Ana", s.ListarClientes()[0].Nome);
     Igual(1, s.ListarClientes("ZEL").Count);
-    Igual(1, s.ListarClientes("@b.com").Count - 1);
+    Igual(2, s.ListarClientes("@b.com").Count);
 });
 
 Testar("cliente inexistente falha", () =>
