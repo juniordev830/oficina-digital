@@ -41,3 +41,7 @@ Usar dados fictícios nos exemplos e manter senhas, tokens, arquivos pessoais e 
 ## Licença
 
 Ainda não definida.
+
+## Guia para contribuir
+
+Veja o [roteiro de testes e manutenção](docs/GUIA_DE_VALIDACAO.md) para validar mudanças com comandos e cenários específicos deste projeto.
