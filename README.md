@@ -1,5 +1,7 @@
 # Oficina Digital
 
+**Navegação** · [Funcionalidades implementadas](#funcionalidades-implementadas) · [Executar](#executar) · [Exemplo de uso](#exemplo-de-uso) · [Código e estudo](docs/ENGENHARIA_REVERSA.md)
+
 Núcleo de gestão de assistência técnica em **.NET 8 / C#**, sem dependências externas e com testes executáveis no CI. Preserva as classes originais `OrdemServico` e `OficinaService`.
 
 ## Funcionalidades implementadas
@@ -73,3 +75,9 @@ Ainda não definida.
 ## Guia para contribuir
 
 Veja o [roteiro de testes e manutenção](docs/GUIA_DE_VALIDACAO.md) para validar mudanças com comandos e cenários específicos deste projeto.
+
+## Código e roteiro de estudo
+
+Em qual camada você impediria o avanço de uma ordem com orçamento pendente? O [guia de engenharia reversa](docs/ENGENHARIA_REVERSA.md) reúne o mapa dos módulos e uma pergunta técnica baseada no projeto.
+
+Mantido por [João Junior](https://github.com/juniordev830).
